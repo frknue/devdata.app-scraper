@@ -24,7 +24,7 @@ const programmingLangs = [
   "C",
   "C%2B%2B",
   "C%23",
-  "Go",
+  "Golang",
   "Rust",
   "Visual Basic",
   "PHP",
@@ -59,17 +59,55 @@ const categories = [
 ];
 
 const createTimeStamp = (): string => {
-  return dayjs().format("YYYY-MM-DD HH:mm:ss");
+  return dayjs().format("DD-MM-YYYY");
 };
 
 const getCountrySubdomain = (country: string): string => {
   switch (country) {
+    case "australia":
+      return "au";
+    case "austria":
+      return "at";
+    case "belgium":
+      return "be";
+    case "canada":
+      return "ca";
+    case "denmark":
+      return "dk";
+    case "finland":
+      return "fi";
     case "france":
       return "fr";
     case "germany":
       return "de";
-    case "united states":
+    case "india":
+      return "in";
+    case "ireland":
+      return "ie";
+    case "italy":
+      return "it";
+    case "luxembourg":
+      return "lu";
+    case "netherlands":
+      return "nl";
+    case "new zealand":
+      return "nz";
+    case "norway":
+      return "no";
+    case "poland":
+      return "pl";
+    case "portugal":
+      return "pt";
+    case "spain":
+      return "es";
+    case "sweden":
+      return "se";
+    case "switzerland":
+      return "ch";
+    case "usa":
       return "";
+    case "united kingdom":
+      return "uk";
     default:
       return "";
   }
@@ -84,17 +122,18 @@ export async function indeedScraper(
   const frameworksData = {};
   const categoriesData = {};
 
-  const timeStamp = createTimeStamp();
+  const timestamp = createTimeStamp();
 
   const subdomain = getCountrySubdomain(country);
   const browser = await puppeteer.launch(browserConfig);
   const page = await browser.newPage();
-  // Set HTTP headers
+
   await page.setExtraHTTPHeaders(httpHeaders);
 
   for (const programmingLang of programmingLangs) {
     const url = `https://${subdomain}.indeed.com/jobs?q=${programmingLang}&l=${city}&radius=0`;
     await page.goto(url, { waitUntil: "load" });
+    await page.waitForTimeout(2000);
     const html = await page.content();
     const $ = cheerio.load(html);
 
@@ -112,6 +151,7 @@ export async function indeedScraper(
   for (const framework of frameworks) {
     const url = `https://${subdomain}.indeed.com/jobs?q=${framework}&l=${city}&radius=0`;
     await page.goto(url, { waitUntil: "load" });
+    await page.waitForTimeout(2000);
     const html = await page.content();
     const $ = cheerio.load(html);
 
@@ -128,6 +168,7 @@ export async function indeedScraper(
   for (const category of categories) {
     const url = `https://${subdomain}.indeed.com/jobs?q=${category}&l=${city}&radius=0`;
     await page.goto(url, { waitUntil: "load" });
+    await page.waitForTimeout(2000);
     const html = await page.content();
     const $ = cheerio.load(html);
 
@@ -147,7 +188,7 @@ export async function indeedScraper(
   delete programmingLangsData["C%23"];
 
   const data = {
-    timeStamp,
+    timestamp,
     city: city,
     country: country,
     programmingLangs: programmingLangsData,

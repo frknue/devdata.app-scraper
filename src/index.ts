@@ -1,12 +1,13 @@
-import fs from "fs";
-import { hey } from "./helper";
 import { indeedScraper } from "./indeed/scraper";
 import { addOrUpdate } from "./libs/db";
-import { dummyData2 } from "./libs/globals";
+import { countryList } from "./libs/countryList";
 
 async function main() {
-  // const data = await indeedScraper("germany", "karlsruhe");
-  await addOrUpdate(dummyData2);
+  const data = await indeedScraper(
+    countryList.canada.country,
+    countryList.canada.cities[1]
+  );
+  await addOrUpdate(data);
 }
 
 main();

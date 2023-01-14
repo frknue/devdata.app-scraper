@@ -40,7 +40,7 @@ export const dummyData = {
   timestamp: "06-05-2022",
 };
 export const dummyData2 = {
-  timeStamp: "2023-01-14 19:14:44",
+  timestamp: "01-01-2023",
   city: "butzbach",
   country: "germany",
   programmingLangs: {

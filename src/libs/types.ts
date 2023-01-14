@@ -1,5 +1,5 @@
 export interface CityData {
-  timeStamp: string;
+  timestamp: string;
   city: string;
   country: string;
   programmingLangs: {
