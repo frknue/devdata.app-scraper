@@ -62,7 +62,7 @@ export const countryList = {
     cities: ["paris", "marseille"],
   },
   germany: {
-    county: "germany",
+    country: "germany",
     cities: [
       "mannheim",
       "karlsruhe",
@@ -197,7 +197,7 @@ export const countryList = {
     cities: ["luxembourg"],
   },
   netherlands: {
-    county: "netherlands",
+    country: "netherlands",
     cities: [
       "amsterdam",
       "rotterdam",
@@ -250,7 +250,7 @@ export const countryList = {
     cities: ["zürich", "zurich"],
   },
   usa: {
-    county: "usa",
+    country: "usa",
     cities: [
       "new york city",
       "los angeles",
@@ -288,7 +288,7 @@ export const countryList = {
     ],
   },
   united_kingdom: {
-    county: "united kingdom",
+    country: "united kingdom",
     cities: [
       "london",
       "bristol",
